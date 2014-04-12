@@ -2,7 +2,7 @@ from flask.ext.wtf import Form
 from wtforms import TextField, validators, FileField, TextAreaField, SubmitField
 #from wtforms import Required
 
-class ProfileForm:
+class ProfileForm(Form):
     name = TextField('Name', [validators.Length(min=4, max=60)])
     picture = FileField('picture')
     location = TextField('Location', [validators.Length(min=0, max=60)])

@@ -11,6 +11,8 @@ SCANNER_ACTIVE = True
 app = Flask(__name__)
 app.config.from_object('config')
 
+#connection = Connection(app.config['mongodb_host'],app.config['mongodb_port'])
+
 from app import views, scanner
 
 
@@ -21,4 +23,5 @@ def scanner_thread():
 
 thread = threading.Thread(target = scanner_thread)
 thread.start()
+
 

@@ -21,8 +21,8 @@ def edit_profile():
         return redirect(url_for('profile', form=form))
         
     #Get cpickle stuff here
-    return render_template('edit_profile.html', form)
+    return render_template('edit_profile.html', form=form)
 
 @app.route('/profile/<form>')
 def upload_file(form):
-    
+   pass 
