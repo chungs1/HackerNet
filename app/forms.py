@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import TextField, validators, FileField, TextAreaField
+from wtforms import TextField, validators, FileField, TextAreaField, SubmitField
 #from wtforms import Required
 
 class ProfileForm:
@@ -10,6 +10,7 @@ class ProfileForm:
     about = TextAreaField('about')
     project = TextField('project')
     project_description = TextAreaField('project_description')
+    submit = SubmitField("Send")
 
     
 

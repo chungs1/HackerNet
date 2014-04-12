@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 	{% block content %}
 		<h1 class="title">Edit Your Profile</h1>
-		<form action="" method="post" name="edit_profile" class="form-horiZontal">
+		<form action="/upload/" method="post" name="edit_profile" class="form-horiZontal" enc-type="multipart/form-data">
 			{{form.hidden_tag()}}
 
-			<div class="form-group">
+			{{ form.name }}
+			{{ form.about }}
+			{{ form.picture }}
+			{{ form.location }}
+			{{ form.organization }}
+			{{ form.project }}
+			{{ form.project_description }}
+
+			<!--<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="name" placeholder="Name">
@@ -61,7 +69,9 @@
     		<div class="col-sm-offset-2 col-sm-10">
       		<button type="submit" class="btn btn-primary">Submit Changes</button>
 		    </div>
-		  </div>
-
+		  </div> -->
+				<div class="form-actions">
+        	<button type="submit" class="btn">SAVE</button>
+        </div>
 		</form>
 	{% endblock %}

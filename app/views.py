@@ -2,25 +2,27 @@ from  app import app
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
 import forms
-import urllib2
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/')
 @app.route('/index')
 def index():
     return 'Placeholder'
 
+@app.route('/edit_profile/', methods=('GET', 'POST'))
 def edit_profile():
     form = ProfileForm()
     if form.validate_on_submit():
-        print form
         #Get form data here!
+        filename = secure_filename(form.picture.file.filename)
+        form.picture.file.save(PATH+filename)
+        
+        return redirect(url_for('profile', form=form))
+        
     #Get cpickle stuff here
     return render_template('edit_profile.html', form)
 
-@app.route('/view/<ip>')
-def view_profile(ip):
-    print ip
-    return redirect(url_for('index'))
-
-
+@app.route('/profile/<form>')
+def upload_file(form):
+    
