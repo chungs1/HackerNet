@@ -70,18 +70,21 @@
    -webkit-text-stroke-color: white;
 			}
 			#comp {
-				width: 130%;
-				height: 130%
-				margin-left:-5%;
+				width: 30%;
+				height: 30%;
+				margin-left:55%;
 			}
 			#comp1 {
-				width: 130%;
-				height: 130%;
-				margin-left: -20%;
+				width: 30%;
+				height: 30%;
+				margin-left: -50%;
+				margin-top: -69%;
 			}
 			#logo{
-				 margin-top: -28%;
-				 margin-left: 6.50%;
+				 margin-top: -45%;
+				 margin-left: 3%;
+				 height: 30%;
+				 width: 30%;
 			}
 
 			#wifi1 {
@@ -106,20 +109,7 @@
         -ms-filter: "FlipH";
 			}
 
-			@keyframes move {
-				25% {
-					left: 100px;
-				}
-				50% {
-					left: 200px;
-				}
-				75% {
-					left: 300px;
-				}
-				100% {
-					left: 400px;
-				}
-			}
+		
 
 			.people {
 				padding-top: 20px;
@@ -144,11 +134,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3">
-						<img id="comp" src=""></img>
+						<img id="comp" src="/static/comp.png"></img>
 					</div>
 					<div class="col-lg-6" id="first">
-						<img id="logo" src="/static/comp.png">HackerNet</img>
+						<img id="logo" src="/static/logo.png"></img>
 						<img id="wifi1" src="/static/wifi.png"></img>
+						<br>
 						YOU ARE CONNECTED!
 						Scroll to see others at your event!
 						<br><br>
@@ -167,14 +158,17 @@
 			<div class="container second-container" >
 				<div class="row mt centered">
 					<div class="col-lg-6 col-lg-offset-3">
-						<h2 id="whosonline">See Who's Online Now!</h2>
+						<center>
+							<h2 id="whosonline">See Who's Online Now!</h2></center>
 						<center><h3> See anyone you know?</h3></center>
 					</div>
 				</div>
 				<div class="row mt centered people">
-					{% for key, value in ipDict.iteritems() %}
-					<div class="col-ls-6 ips">{{key}} -  {{value["name"]}}</div>
-					{% endfor %}
+					<center>
+						{% for key, value in ipDict.iteritems() %}
+						<div class="col-ls-6 ips"><a href="/view/{{key}}/">{{key}} -  {{value["name"]}}</a></div>
+						{% endfor %}
+					</center>
 				</div>
 			</div>
 		</div>
