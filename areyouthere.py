@@ -60,6 +60,7 @@ def find_local_nodes():
 
 def initialize_nodes():
     mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+    mc.set("rerun_setup", False)
     ip_dict = {}
     try:
         pickle_file = open("pickledUser.p")
