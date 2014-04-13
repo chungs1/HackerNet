@@ -15,7 +15,7 @@ class ProfileForm(Form):
 
     def validate_picture(form, field):
         print field.data
-        return '.' in field.data and \
-        field.data.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+        return field == '' or ('.' in field.data and \
+        field.data.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS'])
     
 

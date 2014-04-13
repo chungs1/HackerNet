@@ -10,6 +10,8 @@ import os
 @app.route('/')
 @app.route('/index')
 def index():
+    if request.remote_addr != "127.0.0.1":
+        return "UNAUTHORIZED ACCESS ATTEMPT REJECTED"
     if cache.get('rerun_setup'):
         return "Please restart the application"
     if not cache.get('ip_dict_valid'):
@@ -20,11 +22,13 @@ def index():
 
 @app.route('/edit_profile/', methods=['GET', 'POST'])
 def edit_profile():
+    if request.remote_addr != "127.0.0.1":
+        return "UNAUTHORIZED ACCESS ATTEMPT REJECTED"
     form = ProfileForm()
     if form.validate_on_submit():
 
         file = request.files['picture']
-        file.save(os.path.join(basedir+"/app/static/", 'profile.jpg'))
+        file.save(os.path.join(basedir,"/app/static/")+'profile.jpg')
 
         pickling = {}
         #Get form data here!
