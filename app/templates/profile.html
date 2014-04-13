@@ -1,23 +1,47 @@
 {% extends "base.html" %}
 	{% block content %}
-		<img src="{{pickled.filename}}"></img>
-		<div class="col-sm-2" id="name">
-			<p>{{ pickled.name }}</p>
+		<div class="col-sm-2">
+			Your name is: 
 		</div>
-		<div class="col-sm-2" id="location">
-			<p> {{ pickled.location }}</p>
+		<div class="col-sm-10" id="name">
+			<p>{{ name }}</p>
 		</div>
-		<div class="col-sm-2" id="organization">
-			<p> {{ pickled.organization }}</p>
+
+		<div class="col-sm-2">
+			Location is: 
 		</div>
-		<div class="col-sm-6" id="about">
-			<p> {{ pickled.about }}</p>
+		<div class="col-sm-10" id="location">
+			<p> {{ location }}</p>
 		</div>
-		<div class="col-sm-6" id="project">
-			<p> {{ pickled.project }}</p>
+
+		<div class="col-sm-2">
+			From: 
 		</div>
-		<div class="col-sm-6" id="project_description">
-			<p> {{ pickled.project_description }}</p>
+		<div class="col-sm-10" id="organization">
+			<p> {{ org }}</p>
 		</div>
+
+		<div class="col-sm-2">
+			Who you are: 
+		</div>
+		<div class="col-sm-10" id="about">
+			<p> {{ about }}</p>
+		</div>
+
+		<div class="col-sm-2">
+			Your project is: 
+		</div>
+		<div class="col-sm-10" id="project">
+			<p> {{ project }}</p>
+		</div>
+
+		<div class="col-sm-2">
+			What is that anyway?
+		</div>
+		<div class="col-sm-10" id="project_description">
+			<p> {{ proj_desc }}</p>
+		</div>
+
+		<a class="btn btn-primary" href="/edit_profile/" >Edit Your Profile</a>
 
 	{% endblock %}
