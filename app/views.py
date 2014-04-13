@@ -49,11 +49,18 @@ def view(ip):
 def blank():
     return 'HackerNet'
 
-@app.route('/introduce-reply/<pos>/<name>/')
-def introduce_reply(pos, name):
-    
-    print request.remote_addr
-    return request.remote_addr
+@app.route('/introduce-reply/<loc>/<name>/')
+def introduce_reply(loc, name):
+    ip_dict = app.cache.get('ip_dict')
+    ip_dict[request.remote_addr] = {'name':name, 'location':loc}
+    app.cache.set('ip_dict', ip_dict)
+
+    try:
+        pickled = pickle.load(open('pickledUser.p', 'rb'))
+    except Exception e:
+        pickled = {name: "error", location: "error"}
+    infodict = {'name':pickled['name'], 'location':pickled['location']}
+    return json.dumps(infodict)
 
 '''
 @app.route('/view_profile')
