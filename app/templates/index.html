@@ -62,7 +62,7 @@
 			.second-container {
 				padding-top: 4%;
 				padding-bottom: 10%;
-				background-image: url("http://i.imgur.com/6UxfW1G.png");
+				background-image: url("/static/back.png");
 				background-repeat: repeat-x;
 				color: white;
 				-webkit-text-fill-color: white; /* Will override color (regardless of order) */
@@ -144,11 +144,11 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3">
-						<img id="comp" src="http://i.imgur.com/fAJ8E0O.png"></img>
+						<img id="comp" src=""></img>
 					</div>
 					<div class="col-lg-6" id="first">
-						<img id="logo" src="http://i.imgur.com/IWepWD5.png">HackerNet</img>
-						<img id="wifi1" src="http://i.imgur.com/0NPf3pC.png"></img>
+						<img id="logo" src="/static/comp.png">HackerNet</img>
+						<img id="wifi1" src="/static/wifi.png"></img>
 						YOU ARE CONNECTED!
 						Scroll to see others at your event!
 						<br><br>
@@ -156,9 +156,9 @@
 						<a class="btn btn-success" href="/edit_profile/">Edit Profile</a>
 					</div>
 					<div class="col-lg-3">
-						<img id="wifi2" src="http://i.imgur.com/0NPf3pC.png"></img>
+						<img id="wifi2" src="/static/wifi.png"></img>
 
-						<img id="comp1" src="http://i.imgur.com/fAJ8E0O.png"></img>
+						<img id="comp1" src="/static/comp.png"></img>
 					</div>
 				</div>
 			</div>
@@ -178,32 +178,35 @@
 				</div>
 			</div>
 		</div>
-        <div>
-    <h1>Flask-SocketIO Test</h1>
-    <h2>Send:</h2>
-    <form id="emit" method='POST' action='#'>
-        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
-        <input type="submit" value="Echo"></div>
-    </form>
-    <form id="broadcast" method='POST' action='#'>
-        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
-        <input type="submit" value="Broadcast">
-    </form>
-    <form id="join" method='POST' action='#'>
-        <input type="text" name="join_room" id="join_room" placeholder="Room Name">
-        <input type="submit" value="Join Room">
-    </form>
-    <form id="leave" method='POST' action='#'>
-        <input type="text" name="leave_room" id="leave_room" placeholder="Room Name">
-        <input type="submit" value="Leave Room">
-    </form>
-    <form id="send_room" method='POST' action='#'>
-        <input type="text" name="room_name" id="room_name" placeholder="Room Name">
-        <input type="text" name="room_data" id="room_data" placeholder="Message">
-        <input type="submit" value="Send to Room">
-    </form>
-    <h2>Receive:</h2>
-    <div id="log"></div>
+
+		<div class="container">
+	        <div>
+	    <h1>Flask-SocketIO Test</h1>
+	    <h2>Send:</h2>
+	    <form id="emit" method='POST' action='#'>
+	        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+	        <input type="submit" value="Echo"></div>
+	    </form>
+	    <form id="broadcast" method='POST' action='#'>
+	        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+	        <input type="submit" value="Broadcast">
+	    </form>
+	    <form id="join" method='POST' action='#'>
+	        <input type="text" name="join_room" id="join_room" placeholder="Room Name">
+	        <input type="submit" value="Join Room">
+	    </form>
+	    <form id="leave" method='POST' action='#'>
+	        <input type="text" name="leave_room" id="leave_room" placeholder="Room Name">
+	        <input type="submit" value="Leave Room">
+	    </form>
+	    <form id="send_room" method='POST' action='#'>
+	        <input type="text" name="room_name" id="room_name" placeholder="Room Name">
+	        <input type="text" name="room_data" id="room_data" placeholder="Message">
+	        <input type="submit" value="Send to Room">
+	    </form>
+	    <h2>Receive:</h2>
+	    <div id="log"></div>
+  	</div>
 
 </div>
 	</body>
