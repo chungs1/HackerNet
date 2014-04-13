@@ -28,7 +28,7 @@ def edit_profile():
     if form.validate_on_submit():
 
         file = request.files['picture']
-        file.save(os.path.join(basedir,"/app/static/")+'profile.jpg')
+        file.save(os.path.join(basedir,"app/static/profile.jpg"))
 
         pickling = {}
         #Get form data here!
