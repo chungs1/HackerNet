@@ -1,47 +1,58 @@
 {% extends "base.html" %}
 	{% block content %}
-		<div class="col-sm-2">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<h1>This is who you are</h1>
+		</div>
+	</div>
+	<div class="row moreRoom" style="margin-top:2%;">
+		<div class="col-lg-4 col-lg-offset-4">
+			<img src="http://^url_placeholder^/static/{{picture}}"></img>
+		</div>
+		<div class="col-lg-2 col-lg-offset-4">
 			Your name is: 
 		</div>
-		<div class="col-sm-10" id="name">
+		<div class="col-lg-6" id="name">
 			<p>{{ name }}</p>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-lg-2 col-lg-offset-4">
 			Location is: 
 		</div>
-		<div class="col-sm-10" id="location">
+		<div class="col-lg-6" id="location">
 			<p> {{ location }}</p>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-lg-2 col-lg-offset-4">
 			From: 
 		</div>
-		<div class="col-sm-10" id="organization">
+		<div class="col-lg-6" id="organization">
 			<p> {{ org }}</p>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-lg-2 col-lg-offset-4">
 			Who you are: 
 		</div>
-		<div class="col-sm-10" id="about">
+		<div class="col-lg-6" id="about">
 			<p> {{ about }}</p>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-lg-2 col-lg-offset-4">
 			Your project is: 
 		</div>
-		<div class="col-sm-10" id="project">
+		<div class="col-lg-6" id="project">
 			<p> {{ project }}</p>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-lg-2 col-lg-offset-4">
 			What is that anyway?
 		</div>
-		<div class="col-sm-10" id="project_description">
+		<div class="col-lg-6" id="project_description">
 			<p> {{ proj_desc }}</p>
 		</div>
-
-		<a class="btn btn-primary" href="/edit_profile/" >Edit Your Profile</a>
+		<div class="col-lg-3 col-lg-offset-6" style="margin-top:3%">
+			<a class="btn btn-primary" href="/edit_profile/" >Edit Your Profile</a>
+		</div>
+	</div>
 
 	{% endblock %}
