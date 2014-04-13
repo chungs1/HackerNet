@@ -4,6 +4,7 @@ import time
 import threading
 import os
 from werkzeug.contrib.cache import MemcachedCache
+from flask.ext.socketio import SocketIO
 
 SCAN_WAIT_TIME=300
 
@@ -11,6 +12,8 @@ SCANNER_ACTIVE = True
 
 app = Flask(__name__)
 app.config.from_object('config')
+app.config['SECRET_KEY'] = 'idkwhyweneedthisbutitseemsimportant'
+socketio = SocketIO(app)
 cache = MemcachedCache()
 
 #connection = Connection(app.config['mongodb_host'],app.config['mongodb_port'])
