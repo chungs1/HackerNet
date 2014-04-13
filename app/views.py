@@ -1,6 +1,7 @@
 from app import app, basedir, cache, socketio
 from flask.ext.socketio import emit
 import json
+import urllib
 import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
@@ -107,11 +108,12 @@ def profile():
                            project=pickled["project"],
                            proj_desc=pickled["project_description"])
 
-@app.route('/catch_message', methods=['POST'])
+@app.route('/catch_message', methods=['GET', 'POST'])
 def catch_msg():
     print request.form
     
     emit('my response', {'data':request.form['message']}, broadcast = True)
+    return 'Hi'
 
 
 @socketio.on('my event', namespace='/test')
@@ -120,12 +122,12 @@ def test_message(message):
 
 @socketio.on('my broadcast event', namespace='/test')
 def test_message(message):
-    ip_dict cache.get('ip_dict')
+    ip_dict= cache.get('ip_dict')
     for key, value in ip_dict.iteritems():
-        print sending
-        req = urllib2.Request("http://"+key+"/catch_message")
-        req.add_data(urllib2.urlencode({'data':message['data']}))
-        urllib2.urlopen(req)
+        print 'sending'
+        req = urllib2.Request("http://"+key+":1337/catch_message")
+        req.add_data(urllib.urlencode({'data':message['data']}))
+        output = urllib2.urlopen(req)
 
     emit('my response', {'data': message['data']}, broadcast=True)
 

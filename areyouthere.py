@@ -79,6 +79,7 @@ def initialize_nodes():
         mc.set("ip_dict", ip_dict)
         pickle_file.close()
     except IOError:
+        print 'Interesting'
         mc.set("ip_dict_valid", False)
 
 if __name__ == "__main__":
