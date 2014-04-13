@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+	{% block content %}
+		<img src="{{pickled.filename}}"></img>
+		<div class="col-sm-2" id="name">
+			<p>{{ pickled.name }}</p>
+		</div>
+		<div class="col-sm-2" id="location">
+			<p> {{ pickled.location }}</p>
+		</div>
+		<div class="col-sm-2" id="organization">
+			<p> {{ pickled.organization }}</p>
+		</div>
+		<div class="col-sm-6" id="about">
+			<p> {{ pickled.about }}</p>
+		</div>
+		<div class="col-sm-6" id="project">
+			<p> {{ pickled.project }}</p>
+		</div>
+		<div class="col-sm-6" id="project_description">
+			<p> {{ pickled.project_description }}</p>
+		</div>
+
+	{% endblock %}
