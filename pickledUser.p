@@ -1,0 +1,26 @@
+(dp1
+S'about'
+p2
+Vi'm awesome
+p3
+sS'project_description'
+p4
+Vfdsalkfj
+p5
+sS'name'
+p6
+VEldon
+p7
+sS'project'
+p8
+Vasdf
+p9
+sS'location'
+p10
+V51
+p11
+sS'organization'
+p12
+Vhkn
+p13
+s.

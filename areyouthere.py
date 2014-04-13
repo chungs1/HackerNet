@@ -44,6 +44,7 @@ def gen_classC_ip_list(my_ip):
 def find_local_nodes():
     my_ip = get_lan_ip()
     ip_list = gen_classC_ip_list(my_ip)
+    ip_list = ['10.54.0.172']
     found_nodes = []
     for ip in ip_list:
         print(ip)
@@ -63,11 +64,11 @@ def initialize_nodes():
     try:
         pickle_file = open("pickledUser.p")
         cur_user_data = pickle.load(pickle_file)
-        mc.set("ip_dict_valid", 1)
+        mc.set("ip_dict_valid", True)
         found_nodes = find_local_nodes()
-        for node in found_nodes():
+        for node in found_nodes:
             try:
-                data = urllib2.urlopen("http://" + ip + ":1337/introduce-reply/" + cur_user_data["location"] + "/" + cur_user_data["name"] + "/", timeout = 1)
+                data = urllib2.urlopen("http://" + node + ":1337/introduce-reply/" + cur_user_data["location"] + "/" + cur_user_data["name"] + "/", timeout = 1)
                 if data.getcode() == 200:
                     print data
                     ip_data = json.loads(data)
@@ -78,4 +79,4 @@ def initialize_nodes():
         mc.set("ip_dict", ip_dict)
         pickle_file.close()
     except IOError:
-        mc.set("ip_dict_valid", 0)
+        mc.set("ip_dict_valid", False)
