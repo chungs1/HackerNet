@@ -1,4 +1,6 @@
 *.swp
 *.pyc
 venv/
+pickledUser.p
+app/static/profile.jpg
 

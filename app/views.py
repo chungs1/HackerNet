@@ -1,4 +1,5 @@
 from app import app, basedir, cache
+import json
 import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
@@ -26,6 +27,9 @@ def edit_profile():
         return "UNAUTHORIZED ACCESS ATTEMPT REJECTED"
     form = ProfileForm()
     if form.validate_on_submit():
+        if cache.get('ip_dict_valid'):
+            cache.set('rerun_setup', True)
+            cache.set('ip_dict_valid', True)
 
         file = request.files['picture']
         file.save(os.path.join(basedir,"app/static/profile.jpg"))
