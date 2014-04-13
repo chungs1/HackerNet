@@ -1,4 +1,5 @@
 from  app import app
+import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
 import forms
@@ -33,6 +34,17 @@ def edit_profile():
         
     #Get cpickle stuff here
     return render_template('edit_profile.html', form=form)
+
+@app.route('/view/<ip>')
+def view(ip):
+    return urllib2.urlopen(ip+":1337/profile").read()
+'''
+@app.route('/view_profile')
+def view_profile():
+    #unpickle here and put into the render template
+    profile = None
+    render_template("profile.html", profile);
+'''
 
 @app.route('/profile/')
 def profile():
