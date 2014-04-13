@@ -1,4 +1,4 @@
-from app import app, basedir
+from app import app, basedir, cache
 import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
@@ -10,9 +10,9 @@ import os
 @app.route('/')
 @app.route('/index')
 def index():
-    if app.cache.get('rerun_setup'):
+    if cache.get('rerun_setup'):
         return "Please restart the application"
-    if not app.cache.get('ip_dict_valid'):
+    if not cache.get('ip_dict_valid'):
         flash("You need to set up your profile!")
         return redirect(url_for('edit_profile'))
 
@@ -55,12 +55,12 @@ def receive_message
 
 @app.route('/view/<ip>')
 def view(ip):
-    cached = app.cache.get(ip+"page")
+    cached = cache.get(ip+"page")
     if cached:
         return cached
     else:
         output = urllib2.urlopen(ip+":1337/profile").read().replace("^url_placeholder^", ip)
-        app.cache.set(ip+"page", output)
+        cache.set(ip+"page", output)
         return output
 
 @app.route('/introduce')
@@ -69,9 +69,9 @@ def blank():
 
 @app.route('/introduce-reply/<loc>/<name>/')
 def introduce_reply(loc, name):
-    ip_dict = app.cache.get('ip_dict')
+    ip_dict = cache.get('ip_dict')
     ip_dict[request.remote_addr] = {'name':name, 'location':loc}
-    app.cache.set('ip_dict', ip_dict)
+    cache.set('ip_dict', ip_dict)
 
     try:
         pickled = pickle.load(open('pickledUser.p', 'rb'))
