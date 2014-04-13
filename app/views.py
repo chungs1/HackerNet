@@ -1,4 +1,5 @@
-from app import app, basedir, cache
+from app import app, basedir, cache, socketio
+from flask.ext.socketio import emit
 import json
 import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
@@ -17,9 +18,11 @@ def index():
         return "Please restart the application"
     if not cache.get('ip_dict_valid'):
         flash("You need to set up your profile!")
+        return render_template("indexFirst.html")
         return redirect(url_for('edit_profile'))
 
-    return 'Placeholder'
+    ip_dict = cache.get('ip_dict')
+    return render_template('index.html', ipDict=ip_dict)
 
 @app.route('/edit_profile/', methods=['GET', 'POST'])
 def edit_profile():
@@ -103,3 +106,20 @@ def profile():
                            about=pickled["about"],
                            project=pickled["project"],
                            proj_desc=pickled["project_description"])
+
+
+@socketio.on('my event', namespace='/test')
+def test_message(message):
+    emit('my response', {'data': message['data']})
+
+@socketio.on('my broadcast event', namespace='/test')
+def test_message(message):
+    emit('my response', {'data': message['data']}, broadcast=True)
+
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    emit('my response', {'data': 'Connected'})
+
+@socketio.on('disconnect', namespace='/test')
+def test_disconnect():
+    print('Client disconnected')
