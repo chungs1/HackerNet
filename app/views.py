@@ -112,7 +112,8 @@ def profile():
 def catch_msg():
     print request.form
     
-    emit('my response', {'data':request.form['message']}, broadcast = True)
+    socketio.emit('my response', {'data':request.form['data']}, broadcast = True)
+    
     return 'Hi'
 
 
