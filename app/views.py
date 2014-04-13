@@ -48,18 +48,13 @@ def edit_profile():
 def receive_message
 '''
 
-
-
-
-
-
 @app.route('/view/<ip>')
 def view(ip):
     cached = cache.get(ip+"page")
     if cached:
         return cached
     else:
-        output = urllib2.urlopen(ip+":1337/profile").read().replace("^url_placeholder^", ip)
+        output = urllib2.urlopen("http://"+ip+":1337/profile").read().replace("^url_placeholder^", ip)
         cache.set(ip+"page", output)
         return output
 
