@@ -3,6 +3,7 @@ from config import basedir
 import time
 import threading
 import os
+from werkzeug.contrib.cache import MemcachedCache
 
 SCAN_WAIT_TIME=300
 
@@ -10,6 +11,7 @@ SCANNER_ACTIVE = True
 
 app = Flask(__name__)
 app.config.from_object('config')
+cache = MemcachedCache()
 
 #connection = Connection(app.config['mongodb_host'],app.config['mongodb_port'])
 

@@ -37,7 +37,19 @@ def edit_profile():
 
 @app.route('/view/<ip>')
 def view(ip):
+    #incomplete
     return urllib2.urlopen(ip+":1337/profile").read()
+
+@app.route('/introduce')
+def blank():
+    return 'HackerNet'
+
+@app.route('/introduce-reply/<pos>/<name>/')
+def introduce_reply(pos, name):
+    
+    print request.remote_addr
+    return request.remote_addr
+
 '''
 @app.route('/view_profile')
 def view_profile():
