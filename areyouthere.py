@@ -70,9 +70,8 @@ def initialize_nodes():
             try:
                 data = urllib2.urlopen("http://" + node + ":1337/introduce-reply/" + cur_user_data["location"] + "/" + cur_user_data["name"] + "/", timeout = 1)
                 if data.getcode() == 200:
-                    print data
-                    ip_data = json.loads(data)
-                    ip_dict[node] = {"name": data["name"], "location": data["location"]}
+                    ip_data = json.loads(data.read())
+                    ip_dict[node] = {"name": ip_data["name"], "location": ip_data["location"]}
                     print("successfully retrieved node data!")
             except urllib2.URLError:
                 print("Node " + node + " doesn't seem to be responding.")
