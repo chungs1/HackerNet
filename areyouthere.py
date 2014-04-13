@@ -44,7 +44,7 @@ def gen_classC_ip_list(my_ip):
 def find_local_nodes():
     my_ip = get_lan_ip()
     ip_list = gen_classC_ip_list(my_ip)
-    ip_list = ['10.54.0.172']
+#    ip_list = ['10.54.0.172']
     found_nodes = []
     for ip in ip_list:
         print(ip)
@@ -80,3 +80,7 @@ def initialize_nodes():
         pickle_file.close()
     except IOError:
         mc.set("ip_dict_valid", False)
+
+if __name__ == "__main__":
+    initialize_nodes()
+    import run
