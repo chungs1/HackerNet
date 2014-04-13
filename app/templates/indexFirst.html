@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+		<style>
+			body {
+				background-color: #6dcff7;
+				font-weight: bold;
+				padding-bottom: 10%;
+
+
+			}
+			#second {
+				text-align: center;
+				color: white;
+			}
+			h1 {
+				font-weight: bold;
+				color: white;
+				text-align: center;
+			}
+			h2 {
+				font-weight: bold;
+			}
+
+			#firstTime{
+				padding-top: 10%;
+			}
+			#logo{
+				 margin-top: -35%;
+				 margin-left: 6.50%;
+				 margin-bottom: -20%;
+			}
+			#wifi {
+				position: absolute;
+				margin-top: 4%;
+				margin-left: -20%;
+				width: 50%;
+				height: 50%;
+			}
+
+		</style>
+	</head>
+	
+	<body>
+		<div id="firstTime">
+			<div class="container">
+				<div class="row" id="first">
+					<div class="col-lg-6 col-lg-offset-3">
+						<img id="logo" src="http://i.imgur.com/IWepWD5.png"></img>
+						<img id="wifi" src="http://i.imgur.com/0NPf3pC.png"></img>
+					</div>
+				</div>
+				<div class="row" id="second">
+					<div class="col-lg-6 col-lg-offset-3">
+						<h2 >HEY WHAT ARE YOU DOING?!<br> YOU HAVEN'T TOLD US ANY INFO ABOUT YOURSELF!</h2>
+						<br>
+						<br>
+						<p>Don't you want to connect to your fellow hackers?</p>
+						<a class="btn btn-success btn-lg" href="/edit_profile/">LET'S MAKE YOUR PROFILE!</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(function() {
+				var position = $("#wifi").position();
+				setTimeout(function() {
+					var temp = $("#wifi").position();
+					var added = temp.offset+1
+					$("#wifi").css({"offset": temp.offset+1});
+				}, 10)
+			});
+		</script>
+	</body>
+</html>

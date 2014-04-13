@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+		<style>
+			#headerwrap {
+				background-color: #6dcff7;
+				padding-top: 10%;
+				padding-bottom: 10%;
+				font-size: 16px;
+				font-weight: bolder;
+				width: 100%;
+				font-family: 'Lato', sans-serif;
+				text-align: center;
+				color: white;
+
+			}
+			h1 {
+				font-size: 70px;
+			}
+			h2 {
+				font-size: 50px;
+			}
+			#first {
+				margin-top: 5%;
+			}
+			.second-container {
+				padding-top: 4%;
+				padding-bottom: 35%;
+			}
+			#comp {
+				width: 130%;
+				height: 130%
+				margin-left:-5%;
+			}
+			#comp1 {
+				width: 130%;
+				height: 130%;
+				margin-left: -20%;
+			}
+			#logo{
+				 margin-top: -28%;
+				 margin-left: 6.50%;
+			}
+
+			#wifi1 {
+				position: absolute;
+				margin-top: -65%;
+				margin-left: -24%;
+				width: 35%;
+				height: 25%;
+				-webkit-animation: move 6s ease infinite;
+			}
+			#wifi2 {
+				position: absolute;
+				margin-top: 63%;
+				margin-left: -45%;
+				width: 50%;
+				height: 40%;
+				-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+			}
+
+			@keyframes move {
+				25% {
+					left: 100px;
+				}
+				50% {
+					left: 200px;
+				}
+				75% {
+					left: 300px;
+				}
+				100% {
+					left: 400px;
+				}
+			}
+
+			.ips {
+				padding-top: 10px;
+				text-align: center;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="headerwrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3">
+						<img id="comp" src="http://i.imgur.com/fAJ8E0O.png"></img>
+					</div>
+					<div class="col-lg-6" id="first">
+						<img id="logo" src="http://i.imgur.com/IWepWD5.png">HackerNet</img>
+						<img id="wifi1" src="http://i.imgur.com/0NPf3pC.png"></img>
+						YOU ARE CONNECTED!
+						Scroll to see others at your event!
+						<br><br>
+						Or edit your profile :) <br>
+						<a class="btn btn-success" href="/edit_profile/">Edit Profile</a>
+					</div>
+					<div class="col-lg-3">
+						<img id="wifi2" src="http://i.imgur.com/0NPf3pC.png"></img>
+
+						<img id="comp1" src="http://i.imgur.com/fAJ8E0O.png"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container second-container" >
+			<div class="row mt centered">
+				<div class="col-lg-6 col-lg-offset-3">
+					<h2 id="whosonline">See Who's Online Now!</h2>
+					<center><h3> See anyone you know?</h3></center>
+				</div>
+			</div>
+			<div class="row mt centered people">
+				{% for key, value in ipDict.iteritems() %}
+				<div class="col-ls-6 ips">{{key}} -  {{value[name]}}</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(function() {
+				var position = $("#pic").position();
+				var elementToMove = $("#pic");
+
+				setTimeout(function() {
+					elementToMove.offset
+				});
+			});
+		</script>
+
+	</body>
+</html>
