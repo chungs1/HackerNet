@@ -120,7 +120,7 @@ def test_message(message):
 
 @socketio.on('my broadcast event', namespace='/test')
 def test_message(message):
-    ip_dict cache.get('ip_dict')
+    ip_dict = cache.get('ip_dict')
     for key, value in ip_dict.iteritems():
         print sending
         req = urllib2.Request("http://"+key+"/catch_message")

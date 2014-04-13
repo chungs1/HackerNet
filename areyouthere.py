@@ -41,19 +41,17 @@ def gen_classC_ip_list(my_ip):
     trunc_ip = my_ip[:my_ip.rfind('.') + 1]
     return [trunc_ip + str(i) for i in range(1, 255)]
 
-
 def gen_classB_ip_list(my_ip):
-    trunc_ip = my_ip[:my_ip.rfind('.') + 1]
-    trunc_B_ip = trunc_ip[:trunc_ip.find('.') + 1]
+    my_ip = my_ip.split('.')
     retval = []
-    for i in range(1, 255):
-        for j in range(0, 2):
-          retval.append(trunc_B_ip + str(i) + '.' + str(j))
-    return [trunc_B_ip + str(i) for i in range(1, 255)]
+    for i in range(0, 2):
+        for j in range(1, 255):
+            retval.append(my_ip[0] + '.' + my_ip[1] + '.' + str(i) + '.' + str(j))
+    return retval
 
-def find_local_nodes():
+def find_local_nodes(func=gen_classC_ip_list):
     my_ip = get_lan_ip()
-    ip_list = gen_classC_ip_list(my_ip)
+    ip_list = func(my_ip)
     ip_list = ['10.54.0.172']
     found_nodes = []
     for ip in ip_list:
