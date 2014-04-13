@@ -107,6 +107,11 @@ def profile():
                            project=pickled["project"],
                            proj_desc=pickled["project_description"])
 
+@app.route('/catch_message', methods=['POST'])
+def catch_msg():
+    print request.form
+    request.form['message']
+
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
@@ -114,6 +119,12 @@ def test_message(message):
 
 @socketio.on('my broadcast event', namespace='/test')
 def test_message(message):
+    ip_dict
+    for key, value in ip_dict.iteritems():
+        req = urllib2.Request("http://"+key+"/catch_message")
+        req.add_data(urllib2.urlencode({'data':message['data']}))
+        urllib2.urlopen(req)
+
     emit('my response', {'data': message['data']}, broadcast=True)
 
 @socketio.on('connect', namespace='/test')
