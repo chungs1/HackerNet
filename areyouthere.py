@@ -1,6 +1,9 @@
 import os
 import socket
 import urllib2
+import json
+import cPickle as pickle
+import memcache
 
 if os.name != "nt":
     import fcntl
@@ -52,3 +55,27 @@ def find_local_nodes():
         except urllib2.URLError:
             pass
     return found_nodes
+
+
+def initialize_nodes():
+    mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+    ip_dict = {}
+    try:
+        pickle_file = open("pickledUser.p")
+        cur_user_data = pickle.load(pickle_file)
+        mc.set("ip_dict_valid", 1)
+        found_nodes = find_local_nodes()
+        for node in found_nodes():
+            try:
+                data = urllib2.urlopen("http://" + ip + ":1337/introduce-reply/" + cur_user_data["location"] + "/" + cur_user_data["name"] + "/", timeout = 1)
+                if data.getcode() == 200:
+                    print data
+                    ip_data = json.loads(data)
+                    ip_dict[node] = {"name": data["name"], "location": data["location"]}
+                    print("successfully retrieved node data!")
+            except urllib2.URLError:
+                print("Node " + node + " doesn't seem to be responding.")
+        mc.set("ip_dict", ip_dict)
+        pickle_file.close()
+    except IOError:
+        mc.set("ip_dict_valid", 0)
