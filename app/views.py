@@ -37,8 +37,13 @@ def edit_profile():
 
 @app.route('/view/<ip>')
 def view(ip):
-    #incomplete
-    return urllib2.urlopen(ip+":1337/profile").read()
+    cached = app.cache.get(ip+"page")
+    if cached:
+        return cached
+    else:
+        output = urllib2.urlopen(ip+":1337/profile").read().replace("^url_placeholder^", ip)
+        app.cache.set(ip+"page", output)
+        return output
 
 @app.route('/introduce')
 def blank():
