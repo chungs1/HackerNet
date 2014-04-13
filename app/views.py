@@ -1,4 +1,5 @@
-from  app import app
+from app import app, basedir, cache
+import json
 import urllib2
 from flask import render_template, flash, redirect, url_for, request, g
 from forms import ProfileForm
@@ -6,20 +7,35 @@ import forms
 import cPickle as pickle
 import os
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/')
 @app.route('/index')
 def index():
+    if request.remote_addr != "127.0.0.1":
+        return "UNAUTHORIZED ACCESS ATTEMPT REJECTED"
+    if cache.get('rerun_setup'):
+        return "Please restart the application"
+    if not cache.get('ip_dict_valid'):
+        flash("You need to set up your profile!")
+        return redirect(url_for('edit_profile'))
+
     return 'Placeholder'
 
-@app.route('/edit_profile/', methods=('GET', 'POST'))
+@app.route('/edit_profile/', methods=['GET', 'POST'])
 def edit_profile():
+    if request.remote_addr != "127.0.0.1":
+        return "UNAUTHORIZED ACCESS ATTEMPT REJECTED"
     form = ProfileForm()
     if form.validate_on_submit():
+        if cache.get('ip_dict_valid'):
+            cache.set('rerun_setup', True)
+            cache.set('ip_dict_valid', True)
+
+        file = request.files['picture']
+        file.save(os.path.join(basedir,"app/static/profile.jpg"))
+
         pickling = {}
         #Get form data here!
-        pickling["picture"]=form.picture.data
         pickling["name"] = form.name.data
         pickling["location"] = form.location.data
         pickling["organization"] = form.organization.data
@@ -35,14 +51,19 @@ def edit_profile():
     #Get cpickle stuff here
     return render_template('edit_profile.html', form=form)
 
+'''
+@app.route('/recieve_message', methods=['POST'])
+def receive_message
+'''
+
 @app.route('/view/<ip>')
 def view(ip):
-    cached = app.cache.get(ip+"page")
+    cached = cache.get(ip+"page")
     if cached:
         return cached
     else:
-        output = urllib2.urlopen(ip+":1337/profile").read().replace("^url_placeholder^", ip)
-        app.cache.set(ip+"page", output)
+        output = urllib2.urlopen("http://"+ip+":1337/profile").read().replace("^url_placeholder^", ip)
+        cache.set(ip+"page", output)
         return output
 
 @app.route('/introduce')
@@ -51,14 +72,14 @@ def blank():
 
 @app.route('/introduce-reply/<loc>/<name>/')
 def introduce_reply(loc, name):
-    ip_dict = app.cache.get('ip_dict')
+    ip_dict = cache.get('ip_dict')
     ip_dict[request.remote_addr] = {'name':name, 'location':loc}
-    app.cache.set('ip_dict', ip_dict)
+    cache.set('ip_dict', ip_dict)
 
     try:
         pickled = pickle.load(open('pickledUser.p', 'rb'))
-    except Exception e:
-        pickled = {name: "error", location: "error"}
+    except Exception:
+        pickled = {'name': "error", 'location': "error"}
     infodict = {'name':pickled['name'], 'location':pickled['location']}
     return json.dumps(infodict)
 
@@ -75,7 +96,7 @@ def profile():
     pickled = pickle.load(open('pickledUser.p', 'rb'))
     print(pickled)
     return render_template('profile.html',
-                           picture=pickled["picture"],
+                           picture="/static/profile.jpg",
                            name=pickled["name"],
                            location=pickled["location"],
                            org=pickled["organization"],

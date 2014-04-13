@@ -23,7 +23,7 @@ def scanner_thread():
         scanner.rescan()
         time.sleep(SCAN_WAIT_TIME)
 
-thread = threading.Thread(target = scanner_thread)
-thread.start()
+#thread = threading.Thread(target = scanner_thread)
+#thread.start()
 
 
